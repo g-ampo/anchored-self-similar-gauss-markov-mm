@@ -3,7 +3,7 @@
 #include "ns3/log.h"
 #include "ns3/simulator.h"
 #include "ns3/mobility-model.h"
-
+#include "ns3/node.h"
 #include <cmath>
 #include "ns3/double.h"
 #include "ns3/pointer.h"
@@ -154,7 +154,12 @@ AnchoredSelfSimilarGaussMarkovMobilityModel::Update (void)
   m_position.y += newSpeed * sin (newDirection) * cos (newPitch);
   m_position.z += newSpeed * sin (newPitch);
 
+  // Get the node's ID and print it with the updated position and velocity
+  Ptr<Node> node = GetObject<Node>();
+  uint32_t nodeId = node->GetId();  // Get the node ID
+
   // Print the updated position and velocity for debugging
+  std::cout << "Node ID: " << nodeId << std::endl;
   std::cout << "Position: (" << m_position.x << ", " << m_position.y << ", " << m_position.z << ")" << std::endl;
   std::cout << "Velocity: (" << newSpeed << ", " << newDirection << ", " << newPitch << ")" << std::endl;
 
