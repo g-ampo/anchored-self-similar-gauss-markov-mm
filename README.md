@@ -34,6 +34,39 @@ This source file contains the implementation of the mobility model. It defines t
 ### 3. **`wscript`**
 This is the build script for the NS-3 module. It lists all the source files and ensures that the mobility model is properly integrated into NS-3.
 
+### 4. **`anchored-ss-gm-mm.cc`**
+This is a very simple example to test the correct build and installation of the new mobility model.
+After building, place it in your scratch folder and run with `./waf --run scratch/anchored-ss-gm-mm`.
+
+Your output will look something like:
+
+```
+Node ID: 0
+Position: (-6.96845, 9.37627, 0.0123871)
+Velocity: (-0.193676, -0.0325123, -0.00852872)
+Node ID: 1
+Position: (153.128, -6.16913, 0.709842)
+Velocity: (0.24948, 0.0995129, -0.00637915)
+Node ID: 2
+Position: (105.298, 1.60683, 2.40251)
+Velocity: (0.226218, -0.13562, 0.0509491)
+...
+Node ID: 0
+Position: (-7.12571, 9.39296, 0.0107877)
+Velocity: (-0.158152, -0.105723, 0.0101134)
+Node ID: 1
+Position: (153.41, -6.13179, 0.712582)
+Velocity: (0.284425, 0.131687, 0.00963315)
+Node ID: 2
+Position: (105.265, 1.61004, 2.40156)
+Velocity: (-0.0333995, -0.096095, 0.0283361)
+...
+```
+Key attributes:
+- Node ID: The unique identifier for each node (e.g., 0, 1, 2), which corresponds to the drones created in the simulation.
+- Position: The current 3D position of the node in the simulation space, represented by (X, Y, Z) coordinates. This shows the node's location in the simulated environment at a given time step.
+- Velocity: The current velocity vector of the node, represented by its speed along the (X, Y, Z) axes. This vector indicates how fast and in which direction the node is moving.
+
 ## How the Model Works
 
 ### Equation-Based Mobility Update
@@ -57,10 +90,7 @@ The movement of nodes in this model is governed by a set of Gauss-Markov-based e
     p_n = a_p p_{(n-1)} + (1 - a_p)\bar{p} + \sqrt{(1 - a_p^2)} p_{x_{n-1}}
     \]
     - `a_p` is the randomness factor, which decays based on the previous pitch and acceleration.
-  
-### 4. **`anchored-ss-gm-mm.cc`**
-This is a very simple example to test the correct build and installation of the new mobility model.
-After building, place it in your scratch folder and run with `./waf --run scratch/anchored-ss-gm-mm`.
+
 
 ### Exponentially Decaying Randomness
 
